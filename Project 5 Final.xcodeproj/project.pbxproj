@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		834E2BCE172E67DE0052FA6E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BCD172E67DE0052FA6E /* main.cpp */; };
+		834E2BCE172E67DE0052FA6E /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BCD172E67DE0052FA6E /* Main.cpp */; };
 		834E2BD0172E67DE0052FA6E /* Project_5_Final.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 834E2BCF172E67DE0052FA6E /* Project_5_Final.1 */; };
+		834E2BD8172E681F0052FA6E /* BigCalc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BD6172E681F0052FA6E /* BigCalc.cpp */; };
+		834E2BDB172E685B0052FA6E /* BigInt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BD9172E685B0052FA6E /* BigInt.cpp */; };
+		834E2BDE172E68950052FA6E /* DList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BDC172E68940052FA6E /* DList.cpp */; };
+		834E2BE2172E69220052FA6E /* DListIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BE0172E69220052FA6E /* DListIterator.cpp */; };
+		834E2BE5172E69670052FA6E /* DListNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BE3172E69670052FA6E /* DListNode.cpp */; };
+		834E2BE8172E69B40052FA6E /* DListTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BE6172E69B40052FA6E /* DListTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +32,20 @@
 
 /* Begin PBXFileReference section */
 		834E2BCA172E67DE0052FA6E /* Project 5 Final */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Project 5 Final"; sourceTree = BUILT_PRODUCTS_DIR; };
-		834E2BCD172E67DE0052FA6E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		834E2BCD172E67DE0052FA6E /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 		834E2BCF172E67DE0052FA6E /* Project_5_Final.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Project_5_Final.1; sourceTree = "<group>"; };
+		834E2BD6172E681F0052FA6E /* BigCalc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigCalc.cpp; sourceTree = "<group>"; };
+		834E2BD7172E681F0052FA6E /* BigCalc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BigCalc.hpp; sourceTree = "<group>"; };
+		834E2BD9172E685B0052FA6E /* BigInt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigInt.cpp; sourceTree = "<group>"; };
+		834E2BDA172E685B0052FA6E /* BigInt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BigInt.hpp; sourceTree = "<group>"; };
+		834E2BDC172E68940052FA6E /* DList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DList.cpp; sourceTree = "<group>"; };
+		834E2BDD172E68940052FA6E /* DList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DList.hpp; sourceTree = "<group>"; };
+		834E2BDF172E68D60052FA6E /* DListData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DListData.hpp; sourceTree = "<group>"; };
+		834E2BE0172E69220052FA6E /* DListIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DListIterator.cpp; sourceTree = "<group>"; };
+		834E2BE1172E69220052FA6E /* DListIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DListIterator.hpp; sourceTree = "<group>"; };
+		834E2BE3172E69670052FA6E /* DListNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DListNode.cpp; sourceTree = "<group>"; };
+		834E2BE4172E69670052FA6E /* DListNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DListNode.hpp; sourceTree = "<group>"; };
+		834E2BE6172E69B40052FA6E /* DListTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DListTest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +78,19 @@
 		834E2BCC172E67DE0052FA6E /* Project 5 Final */ = {
 			isa = PBXGroup;
 			children = (
-				834E2BCD172E67DE0052FA6E /* main.cpp */,
+				834E2BCD172E67DE0052FA6E /* Main.cpp */,
+				834E2BD6172E681F0052FA6E /* BigCalc.cpp */,
+				834E2BD7172E681F0052FA6E /* BigCalc.hpp */,
+				834E2BD9172E685B0052FA6E /* BigInt.cpp */,
+				834E2BDA172E685B0052FA6E /* BigInt.hpp */,
+				834E2BDC172E68940052FA6E /* DList.cpp */,
+				834E2BDD172E68940052FA6E /* DList.hpp */,
+				834E2BDF172E68D60052FA6E /* DListData.hpp */,
+				834E2BE0172E69220052FA6E /* DListIterator.cpp */,
+				834E2BE1172E69220052FA6E /* DListIterator.hpp */,
+				834E2BE3172E69670052FA6E /* DListNode.cpp */,
+				834E2BE4172E69670052FA6E /* DListNode.hpp */,
+				834E2BE6172E69B40052FA6E /* DListTest.cpp */,
 				834E2BCF172E67DE0052FA6E /* Project_5_Final.1 */,
 			);
 			path = "Project 5 Final";
@@ -117,7 +147,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834E2BCE172E67DE0052FA6E /* main.cpp in Sources */,
+				834E2BCE172E67DE0052FA6E /* Main.cpp in Sources */,
+				834E2BD8172E681F0052FA6E /* BigCalc.cpp in Sources */,
+				834E2BDB172E685B0052FA6E /* BigInt.cpp in Sources */,
+				834E2BDE172E68950052FA6E /* DList.cpp in Sources */,
+				834E2BE2172E69220052FA6E /* DListIterator.cpp in Sources */,
+				834E2BE5172E69670052FA6E /* DListNode.cpp in Sources */,
+				834E2BE8172E69B40052FA6E /* DListTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
