@@ -5,10 +5,11 @@
 // The implementation of the DListIterator class declared in DListIterator.cpp.
 //
 // THERE ARE 3 INTENTIONALLY PLANTED BUGS IN THIS CODE. THERE MAY BE OTHER, UNDIAGNOSED BUGS, AS WELL. I'M NOT
-// PERFECT MAN.
+// PERFECT MAN. LOLZ.
 //
 // AUTHOR INFORMATION
 // Kevin R. Burger [KRB]
+// Trevor J. Meiss [TJM]
 //
 // Mailing Address:
 // Computer Science & Engineering
@@ -55,7 +56,12 @@ mState(pList.mSize == 0 ? eEmpty : eValid)
 //
 // This is the copy ctor. Make this DListIterator a copy of pIterator.
 //--------------------------------------------------------------------------------------------------------------
-???
+DListIterator::DListIterator(DListIterator const& pIterator) :
+mIterNode(pIterator.mIterNode),
+mList(pIterator.mList),
+mState(pIterator.mState)
+{
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // DListIterator::Backward()
@@ -250,9 +256,41 @@ DListIterator& DListIterator::InsertAfter(tDListData const pData)
 // PSEUDOCODE
 // Study the code for InsertAfter(). This function is similar, but obviously, not identical.
 //
-// By the way, there might be a bug or two in InsertAfter().
+// By the way, there might be a bug or two in InsertAfter(). Lolz.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+DListIterator& DListIterator::InsertBefore(tDListData const pData)
+{
+	// Fail if the iterator is in the invalid state.
+	assert(mState != eInvalid);
+    
+	DListNode *newNode;
+    
+	if (mList.mSize == 0) {
+		newNode = new DListNode(pData, 0, 0);
+		mList.mHead = mList.mTail = newNode;
+        
+    } else if (mIterNode == mList.mHead) {
+		newNode = new DListNode(pData, mIterNode, 0);
+		mIterNode->mPrev = newNode;
+		mList.mTail = newNode;
+        
+	} else if (mIterNode == mList.mTail) {
+		newNode = new DListNode(pData, mIterNode, mIterNode->mPrev);
+		mIterNode->mPrev->mNext = newNode;
+		mIterNode->mPrev = newNode;
+        
+	} else {
+		newNode = new DListNode(pData, mIterNode, mIterNode);
+		mIterNode->mPrev->mNext = newNode;
+		mIterNode->mPrev = newNode;
+	}
+    
+	++mList.mSize;
+	mIterNode = newNode;
+	mState = eValid;
+	return *this;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // DListIterator::operator++(int const) -- Postincrement

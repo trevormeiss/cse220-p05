@@ -8,6 +8,7 @@
 //
 // AUTHOR INFORMATION
 // Kevin R. Burger [KRB]
+// Trevor J. Meiss [TJM]
 //
 // Mailing Address:
 // Computer Science & Engineering
@@ -44,7 +45,9 @@ using std::string;
 // empty list, the mHead and mTail pointers are null (0 in C++), and mSize is 0.
 //--------------------------------------------------------------------------------------------------------------
 DList::DList() :
-
+mHead(0),
+mSize(0),
+mTail(0)
 {
 }
 
@@ -57,7 +60,14 @@ DList::DList() :
 // Initialize the data members in the member init list in the same way you did for the default ctor.
 // In the body of this ctor, call the Copy() function to make a deep copy of pList.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+DList::DList(DList const& pList) :
+mHead(0),
+mSize(0),
+mTail(0)
+{
+    Copy(pList);
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // DList::~DList()
@@ -65,7 +75,12 @@ DList::DList() :
 // The destructor must free all of the memory allocated for the list. In particular, it must delete each of the
 // nodes. This can be accomplished by calling the Erase() function.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+DList::~DList()
+{
+    Erase();
+}
+
 
 //--------------------------------------------------------------------------------------------------------------
 // DList::Append(tDListData const)
@@ -191,7 +206,11 @@ DList::operator string() const
 // PSEUDOCODE
 // Call Append() passing pData as the param and return what Append() returns.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+DList& DList::operator+(tDListData const pData)
+{
+    return Append(pData);
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // DList::operator==(DList const&)
@@ -262,7 +281,12 @@ DList& DList::operator=(DList const& pList)
 //   iterator and passing pData as the param.
 // Return a reference to this DList.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+DList& DList::Prepend(tDListData const pData)
+{
+	Iterator().Begin().InsertBefore(pData);
+	return *this;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // operator<<(ostream&, DList const&)

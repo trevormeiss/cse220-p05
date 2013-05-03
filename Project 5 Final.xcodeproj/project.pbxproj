@@ -14,7 +14,6 @@
 		834E2BDE172E68950052FA6E /* DList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BDC172E68940052FA6E /* DList.cpp */; };
 		834E2BE2172E69220052FA6E /* DListIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BE0172E69220052FA6E /* DListIterator.cpp */; };
 		834E2BE5172E69670052FA6E /* DListNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BE3172E69670052FA6E /* DListNode.cpp */; };
-		834E2BE8172E69B40052FA6E /* DListTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834E2BE6172E69B40052FA6E /* DListTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,7 +44,6 @@
 		834E2BE1172E69220052FA6E /* DListIterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DListIterator.hpp; sourceTree = "<group>"; };
 		834E2BE3172E69670052FA6E /* DListNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DListNode.cpp; sourceTree = "<group>"; };
 		834E2BE4172E69670052FA6E /* DListNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DListNode.hpp; sourceTree = "<group>"; };
-		834E2BE6172E69B40052FA6E /* DListTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DListTest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +88,6 @@
 				834E2BE1172E69220052FA6E /* DListIterator.hpp */,
 				834E2BE3172E69670052FA6E /* DListNode.cpp */,
 				834E2BE4172E69670052FA6E /* DListNode.hpp */,
-				834E2BE6172E69B40052FA6E /* DListTest.cpp */,
 				834E2BCF172E67DE0052FA6E /* Project_5_Final.1 */,
 			);
 			path = "Project 5 Final";
@@ -153,7 +150,6 @@
 				834E2BDE172E68950052FA6E /* DList.cpp in Sources */,
 				834E2BE2172E69220052FA6E /* DListIterator.cpp in Sources */,
 				834E2BE5172E69670052FA6E /* DListNode.cpp in Sources */,
-				834E2BE8172E69B40052FA6E /* DListTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

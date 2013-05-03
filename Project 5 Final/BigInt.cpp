@@ -41,7 +41,7 @@ using std::string;
 // PSEUDOCODE
 // Define PosOne to be the BigInt 1.
 //--------------------------------------------------------------------------------------------------------------
-PosOne = BigInt(1);
+const BigInt BigInt::PosOne = BigInt(1);
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::BigInt()
@@ -50,7 +50,10 @@ PosOne = BigInt(1);
 // Because BitInt is a derived class of DList, the default ctor of the DList class will be automatically called.
 // In the member init list, initialize mSign to ePos.
 //--------------------------------------------------------------------------------------------------------------
-???
+BigInt::BigInt() :
+mSign(ePos)
+{
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::BigInt(char const *)
@@ -61,7 +64,11 @@ PosOne = BigInt(1);
 //   Hint: use the conditional ?: operator.
 // Call Init(char const *) passing pString as the parameter.
 //--------------------------------------------------------------------------------------------------------------
-???
+BigInt::BigInt(char const *pString) :
+mSign(*pString == '-' ? eNeg : ePos)
+{
+    Init(*pString);
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::BigInt(int const)
@@ -89,7 +96,11 @@ BigInt::BigInt(unsigned const pUint)
 // Call Init(char const *) passing a pointer to the C-string stored in pString as the parameter.
 //   Hint: there is a string class function that returns a pointer to the C-string stored within a C++ string.
 //--------------------------------------------------------------------------------------------------------------
-???
+BigInt::BigInt(string const& pString) :
+mSign(pString[0] == '-' ? eNeg : ePos)
+{
+    Init(pString.c_str());
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::BigInt(BigInt const&)
@@ -102,7 +113,11 @@ BigInt::BigInt(unsigned const pUint)
 //   ctor passing pBigInt as the param.
 // In the member init list, initialize mSign to the mSign data member of pBigInt.
 //--------------------------------------------------------------------------------------------------------------
-???
+BigInt::BigInt(BigInt const& pBigInt) :
+DList(pBigInt),
+mSign(pBigInt.mSign)
+{
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::Abs() const
@@ -112,7 +127,12 @@ BigInt::BigInt(unsigned const pUint)
 // Change the mSign data member of absThis to be ePos.
 // Return absThis.
 //--------------------------------------------------------------------------------------------------------------
-???
+BigInt BigInt::Abs() const
+{
+    BigInt absThis = *this;
+    absThis.mSign = ePos;
+    return absThis;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::Add(BigInt const& pRhsOp) const
@@ -151,7 +171,12 @@ BigInt BigInt::Add(BigInt const& pRhsOp) const
 // Set the sign of this BigInt to the sign of pBigInt.
 // Return a reference to this BigInt.
 //--------------------------------------------------------------------------------------------------------------
-???
+BigInt& BigInt::Copy(BigInt const& pBigInt)
+{
+    DList::Copy(pBigInt);
+    mSign = pBigInt.mSign;
+    return *this;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::Divide(BigInt const& pRhsOp, BigInt& pRemainder) const
@@ -166,7 +191,7 @@ BigInt BigInt::Add(BigInt const& pRhsOp) const
 BigInt BigInt::Divide(BigInt const& pRhsOp, BigInt& pRemainder) const
 {
 	BigInt quotient;
-	???
+	//???
 	return quotient;
 }
 
@@ -186,7 +211,13 @@ void BigInt::Init(char const *pString)
 // Call Init(unsigned const) passing the absoluate value of pInt typecasted to unsigned const as the param.
 // Set the sign of this BigInt to ePos or eNeg depending on the sign of pInt.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+void BigInt::Init(int const pInt)
+{
+    Init(static_cast<unsigned const>(abs(pInt)));
+    mSign = pInt > 0 ? ePos : eNeg;
+}
+
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::Init(unsigned const pUint)
@@ -204,7 +235,15 @@ void BigInt::Init(unsigned const pUint)
 // PSEUDOCODE
 // A BigInt is 0 if: (1) mSize is 1; and (2) mHead->mData is 0.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+bool BigInt::IsZero() const
+{
+    if (Size() == 1 && Head()->Data() == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::Max(BigInt const&) const
@@ -234,9 +273,29 @@ BigInt BigInt::Min(BigInt const& pBigInt) const
 //--------------------------------------------------------------------------------------------------------------
 BigInt BigInt::Multiply(BigInt const& pRhsOp) const
 {
-	BigInt product;
-	???
-	return product;
+	BigInt product = BigInt(0);
+    // it1 is the multiplier, it2 is multiplicand
+	DListIterator it1 = pRhsOp.Iterator().End(), it2 = Iterator().End();
+    DListIterator p = product.Iterator();
+    int carry = 0;
+    int t = 0;
+    for (unsigned long j = pRhsOp.Size(); j>0; j--) {
+        if (pRhsOp.IsZero()) {
+            product = BigInt(0);
+        } else {
+            for (unsigned long i = Size(); i>0; i--) {
+                int digit1 = it1();
+                int digit2 = it2 ? it2() : 0;
+                p.Begin(); p.Forward(i+j);
+                t = digit1*digit2 + p() + carry;
+                p(t % 10);
+                carry = t / 10;
+            }
+            p.Begin(); p.Forward(j);
+            p(carry);
+        }
+    }
+    return product.Trim();
 }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -244,7 +303,11 @@ BigInt BigInt::Multiply(BigInt const& pRhsOp) const
 //
 // Negates the sign of this BigInt.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+void BigInt::Negate()
+{
+    mSign = mSign == eNeg ? ePos : eNeg;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::operator++(int const) -- Postincrement
@@ -254,7 +317,13 @@ BigInt BigInt::Multiply(BigInt const& pRhsOp) const
 // PSEUDOCODE
 // Look at how I implemented this function in the DListIterator class. What you need to do here is similar.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+BigInt BigInt::operator++(int const pDummy)
+{
+	BigInt preIncValue = *this;
+	++(*this);
+	return preIncValue;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::operator--(int const) -- Postdeccrement
@@ -264,7 +333,13 @@ BigInt BigInt::Multiply(BigInt const& pRhsOp) const
 // PSEUDOCODE
 // Look at how I implemented this function in the DListIterator class. What you need to do here is similar.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+BigInt BigInt::operator--(int const pDummy)
+{
+	BigInt preDecValue = *this;
+	--(*this);
+	return preDecValue;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::operator++() -- Preincrement
@@ -273,7 +348,12 @@ BigInt BigInt::Multiply(BigInt const& pRhsOp) const
 // Add PosOne to this BigInt.
 // Return a reference to this BigInt.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+BigInt& BigInt::operator++()
+{
+    *this = *this + PosOne;
+    return *this;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::operator--() -- Predeccrement
@@ -282,7 +362,12 @@ BigInt BigInt::Multiply(BigInt const& pRhsOp) const
 // Subtract PosOne from this BigInt.
 // Return a reference to this BigInt.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+BigInt& BigInt::operator--()
+{
+    *this = *this - PosOne;
+    return *this;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::operator string()
@@ -308,18 +393,39 @@ BigInt::operator string() const
 // Call Negate() on negThis to negate the sign.
 // Return negThis.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+BigInt BigInt::operator-() const
+{
+    BigInt negThis = BigInt(*this);
+    negThis.Negate();
+    return negThis;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // BigInt::operator*(BigInt const&)
 //
 // Multiplies this BigInt by pRhsOp. Needs to call Multiply() such that the Multiply() preconditions are met.
 // This function handles that and deals with figuring out the sign of the returned product.
+//
+// PRECONDITIONS OF MULTIPLY
+// Both this BigInt and pRhsOp are positive.
+// this BigInt is greater than or equal to pRhsOp.
 //--------------------------------------------------------------------------------------------------------------
 BigInt BigInt::operator*(BigInt const& pRhsOp) const
 {
 	BigInt product;
-	???
+    // Satisfy preconditions
+	BigInt absThis = Abs(), absRhsOp = pRhsOp.Abs();
+    BigInt term1 = absThis.Max(absRhsOp), term2 = absThis.Min(absRhsOp);
+    // Both signs are the same, product is positive
+    if (mSign == pRhsOp.mSign) {
+		product = term1.Multiply(term2);
+        product.mSign = ePos;
+        // opposite signs, product is negative
+	} else {
+		product = term1.Multiply(term2);
+        product.mSign = eNeg;
+	}
 	return product;
 }
 
@@ -328,12 +434,30 @@ BigInt BigInt::operator*(BigInt const& pRhsOp) const
 //
 // Divides this BigInt by pRhsOp. Needs to call Divide() such that the Divide() preconditions are met. This
 // function handles that and deals with figuring out the sign of the returned quotient.
+//
+// PRECONDITIONS OF DIVIDE
+// Both this BigInt and pRhsOp are positive.
+// this BigInt is greater than or equal to pRhsOp (if it's not, the quotient is 0 and the remainder is pRhsOp).
 //--------------------------------------------------------------------------------------------------------------
 BigInt BigInt::operator/(BigInt const& pRhsOp) const
 {
 	BigInt quotient;
-	???
-	return quotient;
+    BigInt remainder;
+    // If BigInt is not greater than or equal to pRhsOp
+    if (*this < pRhsOp) {
+        quotient = BigInt(0);
+        // Both are positive or negative, quotient positive
+    } else if (mSign == pRhsOp.mSign) {
+		BigInt absThis = Abs(), absRhsOp = pRhsOp.Abs();
+		quotient = absThis.Divide(absRhsOp, remainder);
+        quotient.mSign = ePos;
+        // opposite signs, quotient is negative
+	} else {
+		BigInt absThis = Abs(), absRhsOp = pRhsOp.Abs();
+		quotient = absThis.Divide(absRhsOp, remainder);
+        quotient.mSign = eNeg;
+	}
+	return quotient.Trim();
 }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -396,12 +520,35 @@ BigInt BigInt::operator/(BigInt const& pRhsOp) const
 // PSEUDOCODE
 // Call Divide() such that the preconditions are met. Divide() returns the remainder, and this function must
 // set the sign of the remainder to the sign of this BigInt.
+//
+// PRECONDITIONS OF DIVIDE
+// Both this BigInt and pRhsOp are positive.
+// this BigInt is greater than or equal to pRhsOp (if it's not, the quotient is 0 and the remainder is pRhsOp).
 //--------------------------------------------------------------------------------------------------------------
+//???
 BigInt BigInt::operator%(BigInt const& pRhsOp) const
 {
 	BigInt remainder;
-	???
-	return remainder;
+    // If BigInt is not greater than or equal to pRhsOp
+    if (*this < pRhsOp) {
+        remainder = pRhsOp;
+        remainder.mSign = pRhsOp.mSign;
+    // Both are positive, remainder will be positive
+    } else if (mSign == ePos && pRhsOp.mSign == ePos) {
+		Divide(pRhsOp, remainder);
+        remainder.mSign = ePos;
+    // a is negative, remainder will be negative
+	} else if (mSign == eNeg) {
+		BigInt absThis = Abs(), absRhsOp = pRhsOp.Abs();
+		absThis.Divide(absRhsOp, remainder);
+		remainder.mSign = eNeg;
+    // only b is negative, remainder will be positive
+	} else {
+		BigInt absThis = Abs(), absRhsOp = pRhsOp.Abs();
+		absThis.Divide(absRhsOp, remainder);
+		remainder.mSign = ePos;
+	}
+	return remainder.Trim();
 }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -537,7 +684,7 @@ bool BigInt::operator<(BigInt const& pRhsOp) const
 // BigInt::operator>(BigInt const&)
 //
 // Note that by implementing operator==() and operator<() all four of the remaining relational operators can
-// be implemented using those two. Pretty cool, huh?
+// be implemented using those two. Pretty cool, huh? No.
 //--------------------------------------------------------------------------------------------------------------
 bool BigInt::operator>(BigInt const& pRhsOp) const
 {
@@ -548,7 +695,7 @@ bool BigInt::operator>(BigInt const& pRhsOp) const
 // BigInt::operator<=(BigInt const&)
 //
 // Note that by implementing operator==() and operator<() all four of the remaining relational operators can
-// be implemented using those two. Pretty cool, huh?
+// be implemented using those two. Pretty cool, huh? No.
 //--------------------------------------------------------------------------------------------------------------
 bool BigInt::operator<=(BigInt const& pRhsOp) const
 {
@@ -789,7 +936,13 @@ BigInt& BigInt::Trim()
 // Typecast pBigInt to string and send the resulting string to pStream.
 // Return pStream.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+ostream& operator<<(ostream& pStream, BigInt const& pBigInt)
+{
+    //Unsure
+    pStream << static_cast<string>(pBigInt);
+    return pStream;
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // operator>>(istream&, BigInt const&)
@@ -800,4 +953,13 @@ BigInt& BigInt::Trim()
 // Assign strBigInt to pBigInt (this invokes BigInt::operator=(string const&)).
 // Return pStream.
 //--------------------------------------------------------------------------------------------------------------
-???
+//???
+istream& operator>>(istream& pStream, BigInt& pBigInt)
+{
+    string strBigInt;
+    //Unsure
+    pStream >> strBigInt;
+    strBigInt = pBigInt;
+    return pStream;
+}
+
